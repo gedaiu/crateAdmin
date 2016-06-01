@@ -13,6 +13,14 @@ module.exports = function(environment) {
       }
     },
 
+    contentSecurityPolicy: {
+      'default-src': "'none'",
+      'script-src': "'self' 'unsafe-inline' 'unsafe-eval'",
+      'connect-src': "'self' localhost:9090 szabobogdan.com kangal.szabobogdan.com",
+      'img-src': "'self'",
+      'style-src': "'self' 'unsafe-inline'",
+    },
+
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
@@ -20,6 +28,7 @@ module.exports = function(environment) {
   };
 
   if (environment === 'development') {
+    ENV.apiUrl = 'http://localhost:9090';
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;
     // ENV.APP.LOG_TRANSITIONS = true;

@@ -1,0 +1,46 @@
+<div class="{{recordType}} index">
+
+  {{#unless hideCreate}}
+    {{#if relationshipGiven}}
+      {{link-to 'Create' 'model-records.new' recordType (query-params relationship-name=relationshipName relationship-id=relationshipId)}}
+    {{else}}
+      {{link-to 'Create' 'model-records.new' recordType class="btn btn-default"}}
+    {{/if}}
+  {{/unless}}
+
+  {{input value=filter placeholder="Filter"}}
+
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        {{#each filteredColumns as |column|}}
+          <th>{{column}}</th>
+        {{/each}}
+        <th>&nbsp;</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each filteredRecords as |record|}}
+        <tr>
+          {{#each filteredColumns as |column|}}
+          <td>
+            {{property-print record=record column=column}}
+          </td>
+          {{/each}}
+          <td>
+            {{#link-to 'model-records.edit' recordType record class="btn btn-default"}}
+              <span class="glyphicon glyphicon-pencil"></span>
+            {{/link-to}}
+
+            {{#link-to 'model-records.edit' recordType record class="btn btn-danger"}}
+              <span class="glyphicon glyphicon-remove-circle"></span>
+            {{/link-to}}
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+  {{#unless records}}
+    No records!
+  {{/unless}}
+</div>

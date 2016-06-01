@@ -1,0 +1,41 @@
+<div class="ember-admin">
+  <nav class="navbar navbar-default navbar-fixed-top">
+
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">
+          Admin
+        </a>
+      </div>
+
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+              Model <span class="caret"></span>
+            </a>
+
+            <ul class="dropdown-menu">
+              {{#each filteredModels as |name|}}
+                <li>
+                  {{link-to name 'model-records' name}}
+                </li>
+              {{/each}}
+            </ul>
+          </li>
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            {{#if current-model}}
+              {{link-to 'Create' 'model-records.new' current-model}}
+            {{/if}}
+          </li>
+        </ul>
+
+      </div>
+    </div>
+  </nav>
+
+  {{outlet}}
+</div>
