@@ -11,6 +11,8 @@ export default Route.extend({
 
     set(controller, 'recordType', this.paramsFor('model-records').name);
     this.get('parentController').set('current-model', this.paramsFor('model-records').name);
+    this.get('parentController').set('childController', controller);
+    this.get('parentController').set('indexController', this.controllerFor('model-records/index'));
   },
 
   parentController: Ember.computed( function() {

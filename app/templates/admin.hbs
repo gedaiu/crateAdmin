@@ -12,7 +12,13 @@
         <ul class="nav navbar-nav">
           <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-              Model <span class="caret"></span>
+              {{#if current-model}}
+                {{current-model}}
+              {{else}}
+                Model
+              {{/if}}
+
+              <span class="caret"></span>
             </a>
 
             <ul class="dropdown-menu">
@@ -24,6 +30,14 @@
             </ul>
           </li>
         </ul>
+
+        {{#if current-model}}
+          <div class="navbar-form navbar-left">
+            <div class="form-group">
+              {{input value=indexController.filter placeholder="Filter" class="form-control"}}
+            </div>
+          </div>
+        {{/if}}
 
         <ul class="nav navbar-nav navbar-right">
           <li>
