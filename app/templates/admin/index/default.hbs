@@ -24,9 +24,9 @@
               <span class="glyphicon glyphicon-pencil"></span>
             {{/link-to}}
 
-            {{#link-to 'model-records.edit' recordType record class="btn btn-danger"}}
+            <button class="btn btn-danger" {{action "deleteRecord" record.id}}>
               <span class="glyphicon glyphicon-remove-circle"></span>
-            {{/link-to}}
+            </button>
           </td>
         </tr>
       {{/each}}
