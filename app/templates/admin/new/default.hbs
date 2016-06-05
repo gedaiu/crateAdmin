@@ -8,12 +8,20 @@
   <div class="col-lg-12">
     <form>
       {{#each filteredColumns as |column|}}
-
         <div class="form-group">
-          <label for="exampleInputEmail1">{{column}}</label>
+          <label>{{column}}</label>
           {{inputs/admin-input model=model columnValue=column}}
         </div>
+      {{/each}}
 
+      {{#each relationshipTypes as |relationshipType|}}
+        {{#each relationshipType as |relationship|}}
+          <div class="form-group">
+            {{log "relationship?" relationship}}
+            <label>{{relationship.name}}</label>
+            {{inputs/admin-relation model=model relationship=relationship}}
+          </div>
+        {{/each}}
       {{/each}}
 
       {{async-button action="save" default="Save" pending="Saving..." fulfilled="Saved" rejected="Error" class="save btn btn-default"}}

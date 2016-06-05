@@ -1,0 +1,7 @@
+<option>not set</option>
+
+{{#if records.isFulfilled}}
+  {{#each options as |item|}}
+    <option selected="{{item.selected}}" value="{{item.value.id}}">{{item.value.name}}</option>
+  {{/each}}
+{{/if}}
