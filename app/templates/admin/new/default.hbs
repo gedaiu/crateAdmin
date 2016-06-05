@@ -17,7 +17,6 @@
       {{#each relationshipTypes as |relationshipType|}}
         {{#each relationshipType as |relationship|}}
           <div class="form-group">
-            {{log "relationship?" relationship}}
             <label>{{relationship.name}}</label>
             {{inputs/admin-relation model=model relationship=relationship}}
           </div>
