@@ -52,26 +52,33 @@ export default Ember.Component.extend({
     let model = get(this, "model");
     const columnValue = get(this, "columnValue");
     const values = get(model, columnValue);
-    const records = get(this, "records");
+    const records = get(this, "records").content.slice();
 
     var list = [];
+    var added = {};
 
     values.forEach((item) => {
       let id = item.get("id");
       var optionItem = [];
 
-      records.content.forEach((item, index) => {
+      records.forEach((item, index) => {
         const recordId = get(item, "id");
         const name = get(item, "name");
 
-        optionItem.push({
-          value: {
-            name: name,
-            id: recordId
-          },
+        if(!added[recordId]) {
+          optionItem.push({
+            value: {
+              name: name,
+              id: recordId
+            },
 
-          selected: recordId === id ? "selected" : ""
-        });
+            selected: recordId === id ? "selected" : ""
+          });
+        }
+
+        if(recordId === id) {
+          added[recordId] = true;
+        }
       });
 
       list.push(optionItem);
