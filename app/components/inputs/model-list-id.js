@@ -15,7 +15,7 @@ export default Ember.Component.extend({
 
   records: function() {
     return PromiseObjectProxy.create({ promise: get(this, "getRecords") });
-  }.property("type", "value"),
+  }.property("type"),
 
   getRecords: function() {
     const type = get(this, "type");
@@ -26,7 +26,7 @@ export default Ember.Component.extend({
       });
     });
 
-  }.property("type", "value"),
+  }.property("type"),
 
   newRecord: function() {
     const type = get(this, "type");
@@ -78,25 +78,51 @@ export default Ember.Component.extend({
     });
 
     return list;
-  }.property("type", "value"),
+  }.property("type"),
+
+  canAdd: function() {
+    const records = get(this, "records");
+    const options = get(this, "options");
+    let _this = this;
+    var hasNull = false;
+
+    this.$("select").each(function() {
+      if(_this.$(this).val() === "not set") {
+        hasNull = true;
+      }
+    });
+
+    return !hasNull && records.get("length") !== options.length;
+  }.property("options"),
 
   actions:{
     change: function(index) {
       const columnValue = get(this, "columnValue");
       const id = this.$("select:eq(" + index + ")").val();
       const type = get(this, "type");
-      const records = get(this, "records.content");
       const model = get(this, "model");
+      const value = get(model, columnValue).slice(0);
 
-      console.log(records);
+      if(id === "not set") {
+        value.splice(index, 1);
+        set(model, columnValue, value);
 
-      return this.admin.store.findRecord(type, id).then((record) => {
-        records[index] = record;
-        set(model, columnValue, records);
-      });
+        this.notifyPropertyChange("options");
+      } else {
+        return this.admin.store.findRecord(type, id).then((record) => {
+          value[index] = record;
+          set(model, columnValue, value);
+
+          this.notifyPropertyChange("options");
+        });
+      }
     },
 
     add: function() {
+      if(!this.get("canAdd")) {
+        return;
+      }
+
       let newList = [];
       let model = get(this, "model");
       const columnValue = get(this, "columnValue");

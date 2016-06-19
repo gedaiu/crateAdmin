@@ -11,7 +11,7 @@
       </select>
     {{/each}}
 
-    <button {{action "add"}} class="btn btn-default">
+    <button {{action "add"}} class="btn btn-default {{if canAdd "" "disabled"}}">
       <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
       Add
     </button>
