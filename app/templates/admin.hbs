@@ -31,7 +31,7 @@
           </li>
         </ul>
 
-        {{#if current-model}}
+        {{#if list-model}}
           <div class="navbar-form navbar-left">
             <div class="form-group">
               {{input value=indexController.filter placeholder="Filter" class="form-control"}}
@@ -40,11 +40,17 @@
         {{/if}}
 
         <ul class="nav navbar-nav navbar-right">
-          <li>
-            {{#if current-model}}
+          {{#if list-model}}
+            <li>
               {{link-to 'Create' 'model-records.new' current-model}}
-            {{/if}}
-          </li>
+            </li>
+          {{/if}}
+
+          {{#if item-model}}
+            <li>
+              {{link-to 'Cancel' 'model-records.index' current-model}}
+            </li>
+          {{/if}}
         </ul>
 
       </div>
