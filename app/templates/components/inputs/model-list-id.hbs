@@ -1,0 +1,19 @@
+
+{{#if records.isFulfilled}}
+  <div class="form-group">
+    {{#each options as |optionList index|}}
+      <select class="form-control select" {{action "change" index on="change"}}>
+        <option>not set</option>
+
+        {{#each optionList as |item|}}
+          <option selected="{{item.selected}}" value="{{item.value.id}}">{{item.value.name}}</option>
+        {{/each}}
+      </select>
+    {{/each}}
+
+    <button {{action "add"}} class="btn btn-default">
+      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+      Add
+    </button>
+  </div>
+{{/if}}

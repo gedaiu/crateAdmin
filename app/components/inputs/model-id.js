@@ -22,8 +22,6 @@ export default Ember.Component.extend({
 
     return this.admin.store.findRecord(type, id).then((record) => {
       set(model, columnValue, record);
-
-      console.log("1 => ", get(record, "id"));
     });
   },
 
@@ -34,7 +32,7 @@ export default Ember.Component.extend({
   getRecords: function() {
     const type = get(this, "type");
 
-    return this.admin.store.findAll(type).then(function(records) {
+    return this.admin.store.findAll(type, {reload: true}).then(function(records) {
       return records.filter(function(item) {
         return !get(item, 'isNew');
       });
