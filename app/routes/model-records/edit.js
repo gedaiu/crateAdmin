@@ -13,9 +13,5 @@ export default Route.extend(WriteMixin, AdminItem, {
     return this.admin.store.find(this.paramsFor('model-records').name, params.id);
   },
 
-  parentController: Ember.computed( function() {
-    return this.controllerFor('admin');
-  }),
-
   templateAdminPath: 'admin/edit'
 });

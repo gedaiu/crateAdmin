@@ -14,6 +14,10 @@ export default Ember.Mixin.create({
     controller.set('current-model', this.paramsFor('model-records').name);
   },
 
+  parentController: Ember.computed( function() {
+    return this.controllerFor('admin');
+  }),
+
   actions: {
     cancel() {
       this.transitionTo('model-records', this.paramsFor('model-records').name);
