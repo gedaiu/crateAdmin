@@ -23,9 +23,8 @@
         {{/each}}
       {{/each}}
 
-      {{async-button action="save" default="Save" pending="Saving..." fulfilled="Saved" rejected="Error" class="save btn btn-default"}}
-
-      <button {{action "cancel"}} class="cancel btn btn-default">Cancel</button>
     </form>
   </div>
 </div>
+
+{{admin-item-footer save="save" cancel="cancel"}}
