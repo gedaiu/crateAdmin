@@ -4,27 +4,6 @@
   </div>
 </div>
 
-<div class='rows'>
-  <div class="col-lg-12">
-    <form>
-      {{#each filteredColumns as |column|}}
-        <div class="form-group">
-          <label>{{column}}</label>
-          {{inputs/admin-input model=model columnValue=column}}
-        </div>
-      {{/each}}
-
-      {{#each relationshipTypes as |relationshipType|}}
-        {{#each relationshipType as |relationship|}}
-          <div class="form-group">
-            <label>{{relationship.name}}</label>
-            {{inputs/admin-relation model=model relationship=relationship}}
-          </div>
-        {{/each}}
-      {{/each}}
-    </form>
-  </div>
-</div>
-
+{{admin-item-form filteredColumns=filteredColumns model=model}}
 
 {{admin-item-footer save="save" cancel="cancel"}}
