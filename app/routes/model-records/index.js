@@ -26,14 +26,15 @@ export default Route.extend({
   },
 
   actions: {
-    destroyRecord(id) {
-      let modelName = this.paramsFor('model-records').name;
+    deleteRecord: function(id) {
+      const canDestroy = window.confirm('Are you sure you want to destroy this record?');
+      let promise;
 
-      this.admin.store.findRecord(modelName, id).then((item) => {
-        item.destroyRecord().then(() => {
+      if (canDestroy) {
+        this.controller.get('model').findBy("id", id).destroyRecord().then(() => {
           this.refresh();
         });
-      });
+      }
     }
   }
 });
