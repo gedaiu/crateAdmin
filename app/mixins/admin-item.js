@@ -1,9 +1,7 @@
 import Ember from 'ember';
 
 const {
-  get,
-  Route,
-  RSVP: { Promise }
+  get
 } = Ember;
 
 export default Ember.Mixin.create({

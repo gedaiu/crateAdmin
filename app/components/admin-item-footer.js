@@ -1,9 +1,6 @@
 import Ember from 'ember';
 
 const {
-  get,
-  set,
-  computed,
   Component
 } = Ember;
 

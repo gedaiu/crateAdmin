@@ -61,7 +61,7 @@ export default Ember.Component.extend({
       let id = item.get("id");
       var optionItem = [];
 
-      records.forEach((item, index) => {
+      records.forEach((item) => {
         const recordId = get(item, "id");
         const name = get(item, "name");
 
