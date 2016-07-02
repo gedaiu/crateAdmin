@@ -3,9 +3,9 @@ import Ember from 'ember';
 
 var inflector = Ember.Inflector.inflector; 
 
-inflector.irregular('category', 'categories'); 
+inflector.irregular('comment', 'comments'); 
 
 export default DS.Model.extend({
-  name: DS.attr('string'), 
-  color: DS.attr('string'), 
+  userId: DS.attr('string'), 
+  message: DS.attr('string'), 
 });

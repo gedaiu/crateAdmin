@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import ColumnsMixin from 'ember-admin/mixins/model-records/columns';
+import ColumnsMixin from '../mixins/columns';
 
 const {
   get,
@@ -38,31 +38,6 @@ export default Component.extend(ColumnsMixin, {
         }
       });
     }
-  }),
-
-  relationshipGiven: computed('relationshipName', 'relationshipId', function() {
-    return get(this, 'relationshipName') && get(this, 'relationshipId');
-  }),
-
-  hideCreate: computed('relationshipName', 'relationshipId', function() {
-    const relationshipName = get(this, 'relationshipName');
-    const relationshipId = get(this, 'relationshipId');
-
-    if (relationshipId) {
-      if (isNone(relationshipName)) {
-        return true;
-      } else {
-        const { store } = this.admin;
-        const constructor = store.modelFor(get(this, 'recordType'));
-        const inverseFor = constructor.inverseFor(relationshipName, store);
-        const { kind } = inverseFor;
-
-        if (kind && kind === 'belongsTo' && get(this, 'records.length') > 0) {
-          return true;
-        }
-      }
-    }
-    return false;
   }),
 
   actions: {
