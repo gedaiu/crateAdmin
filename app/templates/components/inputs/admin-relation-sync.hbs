@@ -1,0 +1,15 @@
+
+{{#if belongsTo}}
+  {{inputs/admin-relation-form model=value}}
+{{/if}}
+
+{{#if hasMany}}
+  {{#each value as |item|}}
+    {{inputs/admin-relation-form model=item}}
+  {{/each}}
+
+  <button {{action "add"}} class="btn btn-default">
+    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+    Add
+  </button>
+{{/if}}

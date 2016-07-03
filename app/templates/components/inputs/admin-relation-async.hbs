@@ -1,0 +1,8 @@
+
+{{#if belongsTo}}
+  {{inputs/model-id type=type model=model columnValue=columnValue}}
+{{/if}}
+
+{{#if hasMany}}
+  {{inputs/model-list-id type=type model=model columnValue=columnValue}}
+{{/if}}

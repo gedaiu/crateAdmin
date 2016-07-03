@@ -1,4 +1,4 @@
-import DS from 'ember-data';
-import AppRestAdapter from '../mixins/app-rest-adapter';
+import DS from 'ember-data'
+import AppAdapter from '../mixins/app-adapter'
 
-export default DS.JSONAPIAdapter.extend(AppRestAdapter);
+export default DS.RESTAdapter.extend(AppAdapter);

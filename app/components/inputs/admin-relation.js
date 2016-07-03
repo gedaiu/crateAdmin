@@ -2,48 +2,27 @@ import Ember from 'ember';
 import DS from 'ember-data';
 
 const {
-  get,
   computed,
   Component
 } = Ember;
 
 export default Component.extend({
 
-  type: computed('columnValue', {
-    get() {
-      const relationship = get(this, "relationship");
+  isAsync: function() {
+    let model = this.get("model");
+    let relationship = this.get("relationship");
+    let columnValue = relationship.name;
+    var isAsync = true;
 
-      let relationshipType = 'belongsTo';
-      if(relationship.records instanceof DS.ManyArray || relationship.records instanceof DS.PromiseManyArray) {
-        relationshipType = 'hasMany';
+    model.eachRelationship(function(key, relationship) {
+
+      if(key === columnValue) {
+        if(relationship.options.async === false) {
+          isAsync = false;
+        }
       }
+    });
 
-      return get(relationship, "type");
-    },
-  }),
-
-  columnValue: function() {
-    return get(this, "relationship.name");
-  }.property("relationship"),
-
-  relationshipType: computed('columnValue', {
-    get() {
-      const relationship = get(this, "relationship");
-      var relationshipType = 'belongsTo';
-
-      if(relationship.records instanceof DS.ManyArray || relationship.records instanceof DS.PromiseManyArray) {
-        relationshipType = 'hasMany';
-      }
-
-      return relationshipType;
-    }
-  }),
-
-  hasMany: computed('columnValue', function() {
-    return get(this, "relationshipType") === "hasMany";
-  }),
-
-  belongsTo: computed('columnValue', function() {
-    return get(this, "relationshipType") === "belongsTo";
-  })
+    return isAsync;
+  }.property("relationship", "model"),
 });
